@@ -6,24 +6,13 @@
     <title>AURA AI Aggregator Architecture</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Algebrite for dynamic Algebra and Math solving -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/algebrite/1.4.0/algebrite.bundle-for-browser.js"></script>
     
     <!-- Chosen Palette: Warm Neutrals & Sage (Calm Harmony) -->
-    <!-- Application Structure Plan: A 5-section continuous scrolling SPA + External Link. 
-         - Try Now (External Link)
-         1. Protocol Definitions
-         2. Capability Analytics
-         3. Amalgamation Engine
-         4. Architecture Flow
-         5. Live Simulation -->
-    <!-- Visualization & Content Choices: 
-         - Capability Analytics -> Goal: Compare/Inform -> Viz: Chart.js Radar and Bar charts.
-         - Decision Matrix -> Goal: Organize/Explain -> Viz: Styled HTML Table.
-         - Flow Diagram -> Goal: Relationships -> Viz: CSS Flexbox blocks with Unicode arrows.
-         - Live Simulation -> Goal: Demonstrate -> Viz: JS DOM generated horizontal cards. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
     <script>
         tailwind.config = {
+            darkMode: 'media',
             theme: {
                 extend: {
                     colors: {
@@ -44,9 +33,10 @@
         }
     </script>
     <style>
+        /* BASE STYLES: Adapts to Browser Default */
         body {
-            background-color: #F9F8F6;
-            color: #2D3748;
+            background-color: Canvas;
+            color: CanvasText;
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
@@ -94,6 +84,27 @@
         .nav-active {
             color: #D4A373 !important;
             border-bottom: 2px solid #D4A373;
+        }
+
+        /* DARK MODE OVERRIDES: Dark Grey Backgrounds */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #333333; /* Requested Dark Grey */
+                color: #F9F8F6;
+            }
+            .bg-stonebg { background-color: #2b2b2b !important; }
+            .bg-stonecard, .bg-white { background-color: #404040 !important; color: #F9F8F6 !important; border-color: #555 !important; }
+            .text-stonetext { color: #ffffff !important; }
+            .text-stonemuted, .text-gray-500, .text-gray-400 { color: #cccccc !important; }
+            .border-gray-100, .border-gray-200, .border-gray-300 { border-color: #555 !important; }
+            .bg-gray-50, .bg-gray-100, .bg-gray-200 { background-color: #4a4a4a !important; color: #fff !important; }
+            input { background-color: #2b2b2b !important; color: #ffffff !important; border-color: #555 !important; }
+            nav { background-color: rgba(51, 51, 51, 0.95) !important; border-color: #555 !important; }
+            .bg-\[\#F2F0EB\] { background-color: #222222 !important; }
+            table th { background-color: #2a2a2a !important; border-color: #444 !important; }
+            table tr { border-color: #444 !important; }
+            table tr:hover { background-color: #3a3a3a !important; }
+            footer { background-color: #1a1a1a !important; }
         }
     </style>
 </head>
@@ -439,7 +450,7 @@
                 <div class="text-accentprimary font-bold tracking-widest text-sm uppercase">Phase 5</div>
                 <h2 class="text-4xl md:text-5xl font-bold">The Aggregator Simulator</h2>
                 <p class="text-stonemuted text-lg mb-4">
-                    Experience the underlying concept in action. Enter a prompt below to see how the engine routes requests and streams horizontal responses. 
+                    Experience the underlying concept in action. Enter a prompt below to see how the engine routes requests, applies logical reasoning, solves algebra, and streams responses. 
                 </p>
                 <a href="https://aura-network-omega.vercel.app/" target="_blank" class="inline-block mt-4 px-6 py-2 bg-accentprimary text-white rounded-lg shadow hover:bg-[#c29161] transition-colors font-bold text-sm">
                     Or click here to use the real live application ↗
@@ -464,7 +475,7 @@
 
                 <!-- Chat Input Area -->
                 <div class="bg-white border-b border-gray-200 p-6 flex gap-4 items-center">
-                    <input type="text" id="prompt-input" class="flex-1 px-5 py-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accentprimary focus:border-transparent transition-all text-lg shadow-inner bg-gray-50" placeholder="Type a prompt (try keywords like 'database', 'fast', or 'debate')...">
+                    <input type="text" id="prompt-input" class="flex-1 px-5 py-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accentprimary focus:border-transparent transition-all text-lg shadow-inner bg-gray-50" placeholder="Type a prompt (e.g. 'solve 2x - 10 = 0', 'database search', or any question)...">
                     <button id="send-btn" class="px-8 py-4 bg-stonetext text-white font-bold rounded-xl hover:bg-gray-800 transition-all transform hover:scale-105 active:scale-95 shadow-md flex items-center gap-2 text-lg">
                         Execute <span class="text-xl">↗</span>
                     </button>
@@ -607,12 +618,12 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         animation: { duration: 2000, easing: 'easeOutQuart' },
-                        plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 11, family: 'Inter' } } } },
+                        plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 11, family: 'Inter' }, color: 'inherit' } } },
                         scales: {
                             r: { 
-                                angleLines: { color: 'rgba(0,0,0,0.05)' }, 
-                                grid: { color: 'rgba(0,0,0,0.05)' },
-                                pointLabels: { font: { size: 11, family: 'Inter', weight: 'bold' } },
+                                angleLines: { color: 'rgba(150,150,150,0.2)' }, 
+                                grid: { color: 'rgba(150,150,150,0.2)' },
+                                pointLabels: { font: { size: 11, family: 'Inter', weight: 'bold' }, color: 'inherit' },
                                 ticks: { display: false, min: 0, max: 100 }
                             }
                         }
@@ -637,17 +648,17 @@
                         maintainAspectRatio: false,
                         animation: { duration: 2000, easing: 'easeOutQuart', delay: 500 },
                         plugins: {
-                            legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11, family: 'Inter' } } }
+                            legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11, family: 'Inter' }, color: 'inherit' } }
                         },
                         scales: {
                             y: { 
                                 beginAtZero: true,
-                                grid: { color: 'rgba(0,0,0,0.05)' },
-                                ticks: { font: { family: 'Inter' } }
+                                grid: { color: 'rgba(150,150,150,0.2)' },
+                                ticks: { font: { family: 'Inter' }, color: 'inherit' }
                             },
                             x: {
                                 grid: { display: false },
-                                ticks: { font: { family: 'Inter', weight: 'bold' } }
+                                ticks: { font: { family: 'Inter', weight: 'bold' }, color: 'inherit' }
                             }
                         }
                     }
@@ -656,7 +667,7 @@
         }
 
         // ==========================================
-        // SIMULATION ENGINE LOGIC
+        // SIMULATION ENGINE LOGIC WITH REASONING & ALGEBRA
         // ==========================================
         const promptInput = document.getElementById('prompt-input');
         const sendBtn = document.getElementById('send-btn');
@@ -677,28 +688,71 @@
             const q = query.toLowerCase();
             if (q.includes('database') || q.includes('private') || q.includes('secure')) {
                 return { name: 'MCP (Enterprise)', color: 'bg-[#D4A373]', text: 'Database query detected. Routing through secure MCP tunnel.' };
-            } else if (q.includes('fast') || q.includes('quick') || q.includes('calculate')) {
-                return { name: 'ACP (Lightweight)', color: 'bg-[#8E9B90]', text: 'Speed prioritized. Routing via lightweight REST endpoints.' };
+            } else if (q.includes('fast') || q.includes('quick') || q.includes('calculate') || q.includes('solve')) {
+                return { name: 'ACP (Lightweight)', color: 'bg-[#8E9B90]', text: 'Math/Speed prioritized. Routing via lightweight REST endpoints.' };
             } else if (q.includes('network') || q.includes('verify') || q.includes('trust')) {
                 return { name: 'ANP (Decentralized)', color: 'bg-gray-400', text: 'Verification requested. Using W3C DIDs to query decentralized nodes.' };
             } else if (q.includes('debate') || q.includes('negotiate')) {
                 return { name: 'Agora (Autonomous)', color: 'bg-orange-300', text: 'Unstructured interaction. Agents negotiating parameters autonomously.' };
             }
-            return { name: 'ACP (Default)', color: 'bg-gray-300 text-gray-800', text: 'Standard query. Using default REST routing.' };
+            return { name: 'ACP (Default)', color: 'bg-gray-300 text-gray-800', text: 'Standard query detected. Engaging generalized default routing protocol.' };
         }
 
+        // Generate Predefined Yet Dynamic Responses + Algebra processing
         function generateMockResponse(modelName, queryText, protocolDesc) {
-            const intros = [
-                `Based on the parameters passed via AG-UI, `,
-                `Analyzing the request... `,
-                `Context received from Engine. `
+            
+            // 1. Attempt Algebra & Math Parsing using Algebrite if loaded
+            let mathResult = null;
+            try {
+                if (typeof Algebrite !== 'undefined' && /[a-zA-Z0-9\+\-\*\/\^=]/.test(queryText)) {
+                    let cleanEq = queryText.toLowerCase().replace(/solve/g, '').trim();
+                    if (cleanEq.includes('=')) {
+                        let parts = cleanEq.split('=');
+                        // Find roots (solve for variable)
+                        let result = Algebrite.run(`roots((${parts[0]}) - (${parts[1]}))`).toString();
+                        if(result && result !== "nil" && result !== "[]") {
+                            mathResult = `<strong>Calculated Algebraic Root(s):</strong> ${result}`;
+                        }
+                    } else if (/[0-9]/.test(cleanEq) && /[\+\-\*\/]/.test(cleanEq)) {
+                        // Just simplify/evaluate standard math expression
+                        let result = Algebrite.run(cleanEq).toString();
+                        if(result && result !== "nil") {
+                            mathResult = `<strong>Evaluated Math Result:</strong> ${result}`;
+                        }
+                    }
+                }
+            } catch (e) {
+                console.log("Math evaluation skipped:", e);
+            }
+
+            // 2. Select Randomized Logical Reasoning based on query text
+            const logicalSteps = [
+                `Deconstructing the semantic intent of "${queryText}" and cross-referencing vectorized memory nodes.`,
+                `Applying deterministic heuristics to eliminate false positives in the context of "${queryText}".`,
+                `Executing multi-hop retrieval to validate the underlying premise regarding your inquiry.`,
+                `Synthesizing baseline facts with localized logic constraints mapped to "${queryText}".`
             ];
-            const core = [
-                `The amalgamation handled this efficiently. `,
-                `Data stream established successfully. `,
-                `Processing complete. `
+            
+            const conclusions = [
+                `Consequently, the optimal conclusion for this query has been derived and verified.`,
+                `Therefore, the data securely indicates a targeted response trajectory for your input.`,
+                `As a result, the parameters resolve to a high-confidence metric score.`
             ];
-            return intros[Math.floor(Math.random()*intros.length)] + protocolDesc + " " + core[Math.floor(Math.random()*core.length)] + `Regarding "${queryText}", my synthesized output is ready.`;
+
+            let randomLogic = logicalSteps[Math.floor(Math.random() * logicalSteps.length)];
+            let randomConclusion = conclusions[Math.floor(Math.random() * conclusions.length)];
+
+            let responseBuilder = `<strong class="text-accentprimary">[${modelName} via ${protocolDesc.split('.')[0]}]</strong><br><br>`;
+            responseBuilder += `<strong>Logical Reasoning Initiated:</strong> ${randomLogic}<br><br>`;
+
+            if (mathResult) {
+                responseBuilder += `<div class="p-3 bg-gray-100 dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-600 my-2">${mathResult}</div><br>`;
+            } else {
+                responseBuilder += `<em>Analyzing contextual weights specific to your input...</em><br><br>`;
+            }
+
+            responseBuilder += randomConclusion;
+            return responseBuilder;
         }
 
         sendBtn.addEventListener('click', runSimulation);
@@ -715,7 +769,7 @@
 
             // Update UI State (Processing)
             simContainer.innerHTML = '';
-            statusInd.innerHTML = '<span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse shadow-[0_0_8px_rgba(250,204,21,0.8)]"></span> <span class="text-yellow-600">Context Engine Analyzing...</span>';
+            statusInd.innerHTML = '<span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse shadow-[0_0_8px_rgba(250,204,21,0.8)]"></span> <span class="text-yellow-600">Context Engine Analyzing & Applying Logic...</span>';
             protoInd.classList.add('hidden');
             sendBtn.disabled = true;
             sendBtn.classList.add('opacity-50', 'cursor-not-allowed');
@@ -747,7 +801,7 @@
 
             // Simulate Engine Latency -> Routing -> Streaming
             setTimeout(() => {
-                statusInd.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]"></span> <span class="text-green-600">Active Streams</span>';
+                statusInd.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]"></span> <span class="text-green-600">Active Logical Streams</span>';
                 protoInd.classList.remove('hidden');
                 protoInd.style.display = 'flex';
                 protoBadge.className = `px-3 py-1 rounded text-white font-bold shadow-sm ${context.color}`;
@@ -766,21 +820,30 @@
                     
                     // Simulate typing effect
                     let charIndex = 0;
-                    area.innerHTML = `<span class="typing-cursor font-mono text-xs text-gray-400">Receiving packets via AG-UI...</span>`;
+                    area.innerHTML = `<span class="typing-cursor font-mono text-xs text-gray-400">Receiving reasoned packets via AG-UI...</span>`;
+                    
+                    // HTML strings require innerHTML typing which is complex. 
+                    // To handle HTML tags gracefully in typing animation, we update the bar and inject directly here.
                     const textToType = generateMockResponse(mockModels[index].name, query, context.text);
                     
                     // Stagger start times slightly for realism
                     setTimeout(() => {
+                        // Quick inject for HTML responses to avoid breaking tags
+                        area.innerHTML = "";
+                        let tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = textToType;
+                        let rawTextLength = tempDiv.innerText.length;
+                        
+                        let step = 0;
                         const typeInterval = setInterval(() => {
-                            if (charIndex === 0) area.innerHTML = `<span class="typing-cursor"></span>`; // clear packet text
+                            if (step === 0) area.innerHTML = `<span class="typing-cursor"></span>`; 
 
-                            if (charIndex < textToType.length) {
-                                area.innerHTML = textToType.substring(0, charIndex + 1) + `<span class="typing-cursor"></span>`;
-                                pBarInner.style.width = `${(charIndex / textToType.length) * 100}%`;
-                                charIndex++;
+                            if (step <= 100) {
+                                pBarInner.style.width = `${step}%`;
+                                step += 5;
                             } else {
                                 clearInterval(typeInterval);
-                                area.innerHTML = textToType; // remove cursor
+                                area.innerHTML = textToType; // Inject full HTML safely
                                 tags[index].innerText = 'Complete';
                                 tags[index].className = 'px-2 py-1 bg-gray-100 text-gray-500 text-[10px] font-bold rounded-sm uppercase tracking-wider protocol-tag shadow-sm';
                                 progressBars[index].classList.add('hidden');
@@ -792,7 +855,7 @@
                                     sendBtn.classList.remove('opacity-50', 'cursor-not-allowed');
                                 }
                             }
-                        }, 10 + Math.random() * 25); // Random fast typing speed
+                        }, 40 + Math.random() * 20); 
                     }, index * 250); // Stagger cards visually
                 });
             }, 1200); // 1.2s mock engine latency
